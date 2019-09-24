@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../../core/services/authentication.service';
+import { AuthenticationService } from '../../../core/authentication/services/authentication.service';
 import { User } from '../../../core/models/user';
 import { Router } from '@angular/router';
 
@@ -12,14 +12,14 @@ export class HeaderComponent {
   currentUser: User;
 
   constructor(
-      private router: Router,
-      private authenticationService: AuthenticationService
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   logout() {
-      this.authenticationService.logout();
-      this.router.navigate(['/login']);
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

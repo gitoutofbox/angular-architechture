@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './authentication';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticationModule } from './authentication/backend/authentication.module';
+
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    AuthenticationModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-    // provider used to create fake backend
-    fakeBackendProvider
-  ],
+  providers: [],
   exports: []
 })
 export class CoreModule { }
