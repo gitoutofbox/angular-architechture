@@ -12,6 +12,15 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" (click)="logout()" *ngIf="currentUser" routerLinkActive="active">Logout</a>
-    </li>
+    </li>    
   </ul>
+  <button type="button" class="btn btn-primary" (click)="openModal()">Modal</button>  
 </nav>
+<app-modal-window [showModal]="showModal">
+  <span class="header">Header</span>
+  <div class="body">Body</div>
+  <div class="footer">
+    <button class="btn btn-secondary" (click)="showModal = false">Close</button>
+   <button class="btn btn-primary" (click)="showModal = false">OK</button>
+  </div>
+</app-modal-window>

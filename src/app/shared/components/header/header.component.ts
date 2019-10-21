@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   currentUser: User;
-
+  showModal: boolean = false;
   constructor(
       private router: Router,
       private authenticationService: AuthenticationService
@@ -21,5 +21,9 @@ export class HeaderComponent {
   logout() {
       this.authenticationService.logout();
       this.router.navigate(['/login']);
+  }
+
+  openModal() {
+    this.showModal = !this.showModal;
   }
 }
