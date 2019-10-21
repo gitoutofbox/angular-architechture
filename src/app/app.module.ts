@@ -6,10 +6,7 @@ import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './core/au
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module'
-
 import { AppComponent } from './app.component';
-// import { HeaderComponent } from './shared/components/header/header.component';
-// import { ModalWindowComponent } from './shared/components/modal-window/modal-window.component';
 
 @NgModule({
   declarations: [
