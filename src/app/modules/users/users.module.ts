@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './components/list/list.component';
 import { UpdateComponent } from './components/update/update.component';
 
-
+import {SharedModule } from '@shared/shared.module'
 
 const routes: Routes = [
     { path: '', component: ListComponent },
@@ -16,7 +16,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class UsersModule { }
