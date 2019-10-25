@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './components/list/list.component';
-import { UpdateComponent } from './components/update/update.component';
+import { ListComponent } from './pages/list/list.component';
+import { UpdateComponent } from './pages/update/update.component';
 
-import {SharedModule } from '@shared/shared.module'
+import {SharedModule } from '@shared/shared.module';
 
 const routes: Routes = [
     { path: '', component: ListComponent },
@@ -17,7 +18,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UsersModule { }

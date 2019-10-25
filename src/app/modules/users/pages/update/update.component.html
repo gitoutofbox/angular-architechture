@@ -1,0 +1,27 @@
+<form [formGroup]="userForm" novalidate autocomplete="off">
+  <div class="form-group row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="staticEmail" formControlName="email"
+        [class.is-invalid]="userForm.controls.email.touched && userForm.controls.email.invalid">
+      <div *ngIf="userForm.controls.email.touched">
+        <div class="text-danger" *ngIf="userForm.controls.email.touched && userForm.controls.email.hasError('required')">
+          Email is required</div>
+        <div class="text-danger" *ngIf="userForm.controls.email.hasError('email')">Email is not valid</div>
+        <div class="text-danger" *ngIf="userForm.controls.email.hasError('isEmailUnique')">Email is duplicate</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-2">&nbsp;</div>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Sign in</button></div>
+  </div>
+</form>
