@@ -6,12 +6,16 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 
 import { HeaderComponent } from './components/header/header.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+
+import { ChartsModule } from './modules/charts/charts.module';
+
 @NgModule({
   declarations: [HeaderComponent, ModalWindowComponent, PaginationComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
   ],
-  exports: [HeaderComponent, ModalWindowComponent, PaginationComponent]
+  exports: [HeaderComponent, ModalWindowComponent, PaginationComponent, ChartsModule]
 })
 export class SharedModule { }
