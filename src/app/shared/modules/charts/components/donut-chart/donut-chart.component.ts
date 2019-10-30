@@ -9,12 +9,14 @@ highcharts3D(Highcharts);
 })
 export class DonutChartComponent implements OnInit {
   Highcharts = Highcharts;
-  chartOptions: any;
+  @Input() chartOptions: any;
   //_data: any;
   @Input() title: string;
   @Input() subTitle: string;
   @Input() enable3d: boolean = true;
   @Input() data: any;
+  @Input() showLegend: boolean = false;
+  @Input() showDataLabels: boolean = true;
   // @Input() set data(value: string) {
   //   this._data = value;
   // }
@@ -26,9 +28,7 @@ export class DonutChartComponent implements OnInit {
   }
 
   drawChart() {
-
-
-    this.chartOptions = {
+    let defaultOptions = {
       chart: {
         type: 'pie',
         options3d: {
@@ -45,8 +45,15 @@ export class DonutChartComponent implements OnInit {
       plotOptions: {
         pie: {
           innerSize: 100,
-          depth: 45
+          depth: 45,
+          dataLabels: {
+            enabled: this.showDataLabels
+        },
+        showInLegend: this.showLegend
         }
+      },
+      legend:{
+        enable3d: true
       },
       credits: {
         enabled: false
@@ -56,5 +63,7 @@ export class DonutChartComponent implements OnInit {
         data: this.data
       }]
     };
+    this.chartOptions = Object.assign({},defaultOptions, this.chartOptions);
+    console.log(this.chartOptions)
   }
 }

@@ -178,6 +178,15 @@ export class ChartsComponent implements OnInit {
         }
     }
 ];
+chartOptions = {
+    chart:{
+        type: 'pie',
+        options3d:{            
+            enabled: true,
+            alpha: 45
+        }
+    }
+}
   constructor() { }
 
   ngOnInit() {
