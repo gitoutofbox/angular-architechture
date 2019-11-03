@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d';
+import { ChartServiceService } from '../../services/chart-service.service';
 highcharts3D(Highcharts);
 
 @Component({
@@ -9,14 +10,16 @@ highcharts3D(Highcharts);
   styleUrls: ['./scatter-chart.component.sass']
 })
 export class ScatterChartComponent implements OnInit {
+
   Highcharts = Highcharts;
-  chartOptions: any;
+  @Input() chartOptions: any;
   @Input() title: string;
   @Input() subTitle: string;
   @Input() enable3d: boolean = true;
-  @Input() showLegend: boolean = true;
   @Input() data: any;
-  
+  @Input() showLegend: boolean = false;
+  @Input() showDataLabels: boolean = true;
+
   dummyData: any = [
     [1, 6, 5], [8, 7, 9], [1, 3, 4], [4, 6, 8], [5, 7, 7], [6, 9, 6],
     [7, 0, 5], [2, 3, 3], [3, 9, 8], [3, 6, 5], [4, 9, 4], [2, 3, 3],
@@ -35,13 +38,14 @@ export class ScatterChartComponent implements OnInit {
     [9, 6, 1], [2, 7, 3], [4, 5, 4], [6, 8, 1], [3, 4, 0], [2, 2, 6],
     [5, 1, 2], [9, 9, 7], [6, 9, 9], [8, 4, 3], [4, 1, 7], [6, 2, 5],
     [0, 4, 9], [3, 5, 9], [6, 9, 1], [1, 9, 2]];
-  constructor() { }
+  
+    constructor(private chartServiceService: ChartServiceService) { }
 
   ngOnInit() {
     this.drawChart();
   }
   drawChart() {
-    this.chartOptions = {
+    let defaultOptions = {
       chart: {
         type: 'scatter',
         options3d: {
@@ -68,5 +72,6 @@ export class ScatterChartComponent implements OnInit {
         data: this.data ? this.data : this.dummyData
       }]
     };
+    this.chartOptions = this.chartServiceService.deepMerge(defaultOptions, this.chartOptions);    
   }
 }

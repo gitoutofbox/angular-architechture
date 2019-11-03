@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d';
 highcharts3D(Highcharts);
+
+import { ChartServiceService } from '../../services/chart-service.service';
+
 @Component({
   selector: 'donut-chart',
   templateUrl: './donut-chart.component.html',
@@ -10,21 +13,17 @@ highcharts3D(Highcharts);
 export class DonutChartComponent implements OnInit {
   Highcharts = Highcharts;
   @Input() chartOptions: any;
-  //_data: any;
   @Input() title: string;
   @Input() subTitle: string;
   @Input() enable3d: boolean = true;
   @Input() data: any;
   @Input() showLegend: boolean = false;
   @Input() showDataLabels: boolean = true;
-  // @Input() set data(value: string) {
-  //   this._data = value;
-  // }
 
-  constructor() { }
+  constructor(private chartServiceService: ChartServiceService) { }
 
-  ngOnInit() {
-    this.drawChart();
+  ngOnInit() {    
+    this.drawChart();    
   }
 
   drawChart() {
@@ -63,7 +62,7 @@ export class DonutChartComponent implements OnInit {
         data: this.data
       }]
     };
-    this.chartOptions = Object.assign({},defaultOptions, this.chartOptions);
-    console.log(this.chartOptions)
+
+    this.chartOptions = this.chartServiceService.deepMerge(defaultOptions, this.chartOptions);    
   }
 }
