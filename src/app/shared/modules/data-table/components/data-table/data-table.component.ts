@@ -1,5 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { Coulmn } from '../../interfaces/data-table.interface';
+
+import { Directive, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[ad-host]',
+})
+export class AdDirective {
+  constructor(public viewContainerRef: ViewContainerRef) { }
+}
+
 
 @Component({
   selector: 'data-table',
@@ -9,7 +19,7 @@ import { Coulmn } from '../../interfaces/data-table.interface';
 export class DataTableComponent implements OnInit {
   public columns: Array<Coulmn>;
   public columnData: Array<any>;
-  constructor() { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   @Input() tableHeaders: Array<Coulmn> = [];
   @Input() tableData: Array<any> = [];
 
@@ -54,5 +64,19 @@ export class DataTableComponent implements OnInit {
       { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' }
     ]
   }
+
+
+  // @ViewChild(AdDirective, {read: true}) componentHost: AdDirective;
+  // loadComponent() {
+    
+  //   let component: string = 'ActionEditComponent';
+  //   const componentFactory = this.componentFactoryResolver.resolveComponentFactory("ActionEditComponent");
+
+  //   const viewContainerRef = this.componentHost.viewContainerRef;
+  //   viewContainerRef.clear();
+
+  //   const componentRef = viewContainerRef.createComponent(componentFactory);
+  //   //(<AdComponent>componentRef.instance).data = adItem.data;
+  // }
 
 }
