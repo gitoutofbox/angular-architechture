@@ -1,22 +1,21 @@
 <div class="table-lib-main">
   <table>
       <colgroup>
-          <col span="1" *ngFor="let column of columns;" [style.width]="column.width + 'px'">
+          <col span="1" *ngFor="let header of tableHeaders;" [style.width]="header.width + 'px'">
       </colgroup>
       <thead stickyHead>
           <tr>
-              <th *ngFor="let column of columns;" id="{{column.name}}" resizeCol>
-                  <div [style.width]="column.width - 1 + 'px'">
-                      {{column.displayText}}
+              <th *ngFor="let header of tableHeaders;" id="{{header.name}}" resizeCol>
+                  <div [style.width]="header.width - 1 + 'px'">
+                      {{header.displayText}}
                   </div>
-                  <!-- <div class="resizer" [style.width]="width + 'px'">{{width}}</div> -->
               </th>
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let data of columnData; let i = index;">
-              <td *ngFor="let column of columns;">
-                  {{data[column.name]}}</td>
+          <tr *ngFor="let data of tableData; let i = index;">
+              <td *ngFor="let header of tableHeaders;">
+                  {{data[header.name]}}</td>
           </tr>
       </tbody>  
   </table>
