@@ -1,12 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ElementRef } from '@angular/core';
 import { Coulmn } from '../../interfaces/data-table.interface';
-
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[ad-host]',
+  selector: '[component-host]',
 })
-export class AdDirective {
+export class HostDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }
 }
 
@@ -19,7 +18,7 @@ export class AdDirective {
 export class DataTableComponent implements OnInit {
   public columns: Array<Coulmn>;
   public columnData: Array<any>;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, public viewContainerRef: ViewContainerRef) { }
   @Input() tableHeaders: Array<Coulmn> = [];
   @Input() tableData: Array<any> = [];
 
@@ -27,6 +26,8 @@ export class DataTableComponent implements OnInit {
    
     this.tableHeaders = this.tableHeaders.length ? this.tableHeaders : this.testHeaders();
     this.tableData = this.tableData.length ? this.tableData : this.testData();
+
+    this.loadComponent();
   }
 
   testHeaders() {
@@ -66,17 +67,19 @@ export class DataTableComponent implements OnInit {
   }
 
 
-  // @ViewChild(AdDirective, {read: true}) componentHost: AdDirective;
-  // loadComponent() {
-    
-  //   let component: string = 'ActionEditComponent';
-  //   const componentFactory = this.componentFactoryResolver.resolveComponentFactory("ActionEditComponent");
+   @ViewChild('componentHost', {static: true, read: ViewContainerRef} as any) componentHost: ViewContainerRef;
+  //@ViewChild(HostDirective, {static: true} as any) componentHost: HostDirective;
+  loadComponent() {
+    console.log('hi', this.componentHost)
+    let component: any = 'ActionEditComponent';
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
 
-  //   const viewContainerRef = this.componentHost.viewContainerRef;
-  //   viewContainerRef.clear();
+    // const viewContainerRef = this.componentHost.viewContainerRef;
+    // viewContainerRef.clear();
+    //const componentRef = viewContainerRef.createComponent(componentFactory);
+    //(<AdComponent>componentRef.instance).data = adItem.data;
 
-  //   const componentRef = viewContainerRef.createComponent(componentFactory);
-  //   //(<AdComponent>componentRef.instance).data = adItem.data;
-  // }
+    this.componentHost.createComponent(componentFactory);
+  }
 
 }
