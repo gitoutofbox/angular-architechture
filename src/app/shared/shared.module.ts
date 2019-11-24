@@ -9,16 +9,22 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 
 import { ChartsModule } from './modules/charts/charts.module';
 import { DataTableModule } from './modules/data-table/data-table.module';
+// import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, ModalWindowComponent, PaginationComponent],
+  declarations: [HeaderComponent, ModalWindowComponent, PaginationComponent, 
+   // ComponentLoaderComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
     ChartsModule,
     DataTableModule
   ],
-  exports: [HeaderComponent, ModalWindowComponent, PaginationComponent, ChartsModule, DataTableModule]
+  exports: [HeaderComponent, ModalWindowComponent,
+    PaginationComponent, ChartsModule, DataTableModule,
+    //ComponentLoaderComponent
+  ]
 })
 export class SharedModule { }

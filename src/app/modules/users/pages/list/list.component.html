@@ -1,2 +1,4 @@
-<div><data-table></data-table></div>
+<div>
+    <data-table [tableHeaders]="tableHeaders" [tableData]="tableData"></data-table>
+</div>
 <pagination [totalRecords]="totalRecords" [recordsPerPage]="recordsPerPage" [currentPage]="currentPage" (doPaginate)="doPaginate($event)"></pagination>

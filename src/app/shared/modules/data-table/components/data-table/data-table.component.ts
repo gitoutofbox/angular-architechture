@@ -1,14 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Coulmn } from '../../interfaces/data-table.interface';
-import { Directive, ViewContainerRef } from '@angular/core';
-
-@Directive({
-  selector: '[component-host]',
-})
-export class HostDirective {
-  constructor(public viewContainerRef: ViewContainerRef) { }
-}
-
+import { DynamicLoadService } from '@shared/services/dynamic-load';
 
 @Component({
   selector: 'data-table',
@@ -16,27 +8,24 @@ export class HostDirective {
   styleUrls: ['./data-table.component.sass']
 })
 export class DataTableComponent implements OnInit {
-  public columns: Array<Coulmn>;
-  public columnData: Array<any>;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, public viewContainerRef: ViewContainerRef) { }
+  public components: any;
   @Input() tableHeaders: Array<Coulmn> = [];
   @Input() tableData: Array<any> = [];
+  constructor(private dynamicLoadService : DynamicLoadService) { }
 
   ngOnInit() {
-   
+    this.components = this.dynamicLoadService.getComponent();
     this.tableHeaders = this.tableHeaders.length ? this.tableHeaders : this.testHeaders();
-    this.tableData = this.tableData.length ? this.tableData : this.testData();
-
-    this.loadComponent();
+    this.tableData = this.tableData && this.tableData.length ? this.tableData : this.testData();
   }
 
   testHeaders() {
     return [
-      { name: 'Col1', displayText: 'Col 1', width: '200' },
-      { name: 'Col2', displayText: 'Col 2', width: '200' },
-      { name: 'Col3', displayText: 'Col 3', width: '200' },
-      { name: 'Col4', displayText: 'Col 4', width: '100' },
-      { name: 'Col5', displayText: 'Col 4', width: '200' }
+      { displayText: 'Col 1', mapWith:'', width: '200' },
+      { displayText: 'Col 2', mapWith:'', width: '200' },
+      { displayText: 'Col 3', mapWith:'', width: '200' },
+      { displayText: 'Col 4', mapWith:'', width: '100' },
+      { displayText: 'Col 4', mapWith:'', width: '200' }
     ];
   }
   testData() {
@@ -44,42 +33,7 @@ export class DataTableComponent implements OnInit {
       { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
       { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
       { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
-      { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' },
       { Col1: 10, Col2: 5, Col3: 'asd', Col4: '234', Col5: '3e43' }
     ]
   }
-
-
-   @ViewChild('componentHost', {static: true, read: ViewContainerRef} as any) componentHost: ViewContainerRef;
-  //@ViewChild(HostDirective, {static: true} as any) componentHost: HostDirective;
-  loadComponent() {
-    console.log('hi', this.componentHost)
-    let component: any = 'ActionEditComponent';
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-
-    // const viewContainerRef = this.componentHost.viewContainerRef;
-    // viewContainerRef.clear();
-    //const componentRef = viewContainerRef.createComponent(componentFactory);
-    //(<AdComponent>componentRef.instance).data = adItem.data;
-
-    this.componentHost.createComponent(componentFactory);
-  }
-
 }

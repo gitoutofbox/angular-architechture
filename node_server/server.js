@@ -4,6 +4,7 @@ var express = require('express');
 
 var mysql = require('mysql');
 var sql = require("mssql");
+var cors = require('cors')
 
 
 var bodyParser = require('body-parser');
@@ -12,7 +13,7 @@ var user_collection = '';
 app.use(express.static('app'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+app.use(cors())
 
 // mysql
 var con = mysql.createConnection({ 
@@ -58,7 +59,7 @@ con.connect(function (err) {
 // });
 
 var base = "/app"
-app.get('/users', function (req, res) {
+app.get('/userList', function (req, res) {
   let sql = "SELECT * FROM arc_users";
   con.query(sql, (err, rows) => {
     if (err) throw err;
@@ -67,6 +68,7 @@ app.get('/users', function (req, res) {
       statusMessage: "",
       data: rows
     }
+    //console.log(resp)
     res.send(resp);
   });
 

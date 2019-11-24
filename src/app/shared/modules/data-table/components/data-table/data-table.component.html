@@ -1,26 +1,32 @@
+<!-- <app-component-loader [ads]="components"></app-component-loader>
+<app-component-loader [ads]="components"></app-component-loader> -->
 
-<ng-template #componentHost></ng-template>
-<br />
-hi
+
 <div class="table-lib-main">
-  <table>
-      <colgroup>
-          <col span="1" *ngFor="let header of tableHeaders;" [style.width]="header.width + 'px'">
-      </colgroup>
-      <thead stickyHead>
-          <tr>
-              <th *ngFor="let header of tableHeaders;" id="{{header.name}}" resizeCol>
-                  <div [style.width]="header.width - 1 + 'px'">
-                      {{header.displayText}}
-                  </div>
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let data of tableData; let i = index;">
-              <td *ngFor="let header of tableHeaders;">
-                  {{data[header.name]}}</td>
-          </tr>
-      </tbody>  
-  </table>
+    <table>
+        <colgroup>
+            <col span="1" *ngFor="let header of tableHeaders;"
+                [style.width]="(header.width ? header.width: 200) + 'px'">
+        </colgroup>
+        <thead stickyHead>
+            <tr>
+                <th *ngFor="let header of tableHeaders;" resizeCol>
+                    <div [style.width]="(header.width ? header.width: 200) - 1 + 'px'">
+                        {{header.displayText}}
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of tableData">
+                <ng-container *ngFor=" let header of tableHeaders;">
+                    <td>
+                        <app-component-loader [components]="components"></app-component-loader>
+
+                        {{row[header.mapWith]}}
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
 </div>
