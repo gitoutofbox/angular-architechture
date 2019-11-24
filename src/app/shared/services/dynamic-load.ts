@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActionEditComponent } from '@modules/users/components/action-edit/action-edit.component';
+import { ActionDeleteComponent } from '@modules/users/components/action-delete/action-delete.component';
+import { ChangeStatusComponent } from '@modules/users/components/change-status/change-status.component';
 
 
 import { Type } from '@angular/core';
@@ -13,16 +15,12 @@ export class ComponentItem {
 export class DynamicLoadService {
     constructor() { }
     getComponent() {
-        return [
-             new ComponentItem(ActionEditComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
-      
-            // new ComponentItem(HeroProfileComponent, {name: 'Dr IQ', bio: 'Smart as they come'}),
-      
-            // new ComponentItem(HeroJobAdComponent,   {headline: 'Hiring for several positions',
-            //                                   body: 'Submit your resume today!'}),
-      
-            // new ComponentItem(HeroJobAdComponent,   {headline: 'Openings in all departments',
-            //                                   body: 'Apply today'}),
-          ];
+        return {
+            'ActionEditComponent':  new ComponentItem(ActionEditComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
+            'ActionDeleteComponent':  new ComponentItem(ActionDeleteComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
+            'ChangeStatusComponent':  new ComponentItem(ChangeStatusComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
+            
+            
+        };
     }
 }

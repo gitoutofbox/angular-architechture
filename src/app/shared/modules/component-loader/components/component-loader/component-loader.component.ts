@@ -11,7 +11,8 @@ import { ComponentItem } from '../../interfaces/component-item.interface';
   styleUrls: ['./component-loader.component.sass']
 })
 export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() components: ComponentItem[];
+  @Input() component: ComponentItem;
+  @Input() data: any;
 
   @ViewChild('componentHost', {static: true, read: ViewContainerRef} as any) componentHost: ViewContainerRef;
 
@@ -30,10 +31,13 @@ export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewIni
   
   loadComponent() {
     if(typeof this.componentHost !== 'undefined'){
-      let componentObj= this.components[0];      
+      let componentObj= this.component;
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentObj.component);
       const componentRef = this.componentHost.createComponent(componentFactory);
-      (<any>componentRef.instance).data = componentObj.data;
+      //(<any>componentRef.instance).data = componentObj.data;
+      setTimeout(()=> {
+        (<any>componentRef.instance).data = this.data;
+      },10);
     }
   }
 }
