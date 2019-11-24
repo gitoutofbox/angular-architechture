@@ -1,5 +1,4 @@
 import { Component,ViewContainerRef,  Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, AfterViewInit } from '@angular/core';
-import { ComponentLoaderDirective } from '../../directives/component-loader.directive';
 import { ComponentItem } from '../../interfaces/component-item.interface';
 
 // import { Type } from '@angular/core';
@@ -12,12 +11,7 @@ import { ComponentItem } from '../../interfaces/component-item.interface';
   styleUrls: ['./component-loader.component.sass']
 })
 export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
-
   @Input() components: ComponentItem[];
-  currentAdIndex = -1;
-  @ViewChild(ComponentLoaderDirective, {static: true}) adHost: ComponentLoaderDirective;
-  interval: any;
-
 
   @ViewChild('componentHost', {static: true, read: ViewContainerRef} as any) componentHost: ViewContainerRef;
 
