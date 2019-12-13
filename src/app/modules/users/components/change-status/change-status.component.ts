@@ -16,4 +16,7 @@ export class ChangeStatusComponent implements OnInit, AfterViewInit  {
   ngAfterViewInit() {
     console.log('data', this.data) 
   }
+  changeStatus() {
+    console.log('data', this.data.is_active)
+  }
 }
