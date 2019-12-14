@@ -110,20 +110,45 @@ app.get('/userList', function (req, res) {
 //   });
 // })
 
+app.put('/user/:id', function (req, res) {
+  let set = '';
+  const where = `user_id = ${req.params.id}`;
+  for(let i in req.body) {
+    if(set != '') {
+      set += `, ${i} = ${req.body[i]}`;
+    } else {
+      set += `${i} = ${req.body[i]}`;
+    }
+  }
+  console.log(set)
+  let sql = `UPDATE arc_users SET ${set} WHERE ${where}`;
+  console.log(sql)
+  con.query(sql, (err, rows) => {
+    if (err) throw err;
+    let resp = {
+      status: "success",
+      statusMessage: "",
+      data: rows
+    }
+    //console.log(resp)
+    res.send(resp);
+  });
 
-// app.delete('/delete/:id', function (req, res) {
-//    // First read existing users.
-//    user_collection.remove({_id: ObjectId(req.params.id)},{w:1}, function(err, result) {
-//     if(err == null) {
-//         user_collection.find().toArray(function(err, results){
-//           res.end(JSON.stringify( results ));
-//         });
-//         //res.end(JSON.stringify({'status':'success'}));
-//       } else {
-//         res.end(JSON.stringify({'status':'error','err':err}));
-//       }
-//   });
-// });
+})
+
+app.delete('/delete/:id', function (req, res) {
+   // First read existing users.
+   user_collection.remove({_id: ObjectId(req.params.id)},{w:1}, function(err, result) {
+    if(err == null) {
+        user_collection.find().toArray(function(err, results){
+          res.end(JSON.stringify( results ));
+        });
+        //res.end(JSON.stringify({'status':'success'}));
+      } else {
+        res.end(JSON.stringify({'status':'error','err':err}));
+      }
+  });
+});
 
 // app.get('/*.html', function (req, res) {	
 //    res.sendFile( __dirname + base +  "/" + req.params[0] + '.html' );

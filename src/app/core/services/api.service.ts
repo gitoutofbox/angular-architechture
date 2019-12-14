@@ -19,9 +19,9 @@ export class ApiService {
 //   post(url: string, postData: Object) {
 //       return this.http.post(url, postData).map((res:Response) => res.json());
 //   }
-//   put(url: string, postData: Object) {
-//       return this.http.put(url, postData).map((res:Response) => res.json());
-//   }
+  put(url: string, postData: Object) {
+      return this.http.put(url, postData);//.map((res:Response) => res.json());
+  }
 
 //   patch(url: string, postData: Object) {
 //       return this.http.patch(url, postData).map((res:Response) => res.json());
