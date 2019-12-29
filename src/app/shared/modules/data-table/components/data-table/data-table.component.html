@@ -22,7 +22,8 @@
                 <ng-container *ngFor=" let header of tableHeaders;">
                     <td [ngClass]="header.class">
                         <div *ngIf="(header.mapWith == '' && header.component != ''); else elseBlock">
-                            <app-component-loader [component]="components[comp]" [data]="row" *ngFor="let comp of header.components"></app-component-loader>
+                            <!-- <app-component-loader [component]="components[comp]" [data]="row" *ngFor="let comp of header.components"></app-component-loader> -->
+                            <app-component-loader [component]="header.components" [data]="row"></app-component-loader>
                         </div>
                         <ng-template #elseBlock>{{row[header.mapWith]}}</ng-template>
                     </td>

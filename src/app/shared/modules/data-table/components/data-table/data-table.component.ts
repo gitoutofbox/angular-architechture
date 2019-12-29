@@ -8,13 +8,13 @@ import { DynamicLoadService } from '@shared/services/dynamic-load';
   styleUrls: ['./data-table.component.sass']
 })
 export class DataTableComponent implements OnInit {
-  public components: any;
+  // public components: any;
   @Input() tableHeaders: Array<Coulmn> = [];
   @Input() tableData: Array<any> = [];
   constructor(private dynamicLoadService : DynamicLoadService) { }
 
   ngOnInit() {
-    this.components = this.dynamicLoadService.getComponent();
+    // this.components = this.dynamicLoadService.getComponent();
     // this.tableHeaders = this.tableHeaders.length ? this.tableHeaders : this.testHeaders();
     // this.tableData = this.tableData && this.tableData.length ? this.tableData : this.testData();
 

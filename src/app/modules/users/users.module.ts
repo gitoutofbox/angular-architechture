@@ -7,17 +7,21 @@ import { ListComponent } from './pages/list/list.component';
 import { UpdateComponent } from './pages/update/update.component';
 
 import { SharedModule } from '@shared/shared.module';
-// import { ChageStatusComponent } from './components/chage-status/chage-status.component';
-// import { ActionDeleteComponent } from './components/action-delete/action-delete.component';
-//  import { ActionEditComponent } from './components/action-edit/action-edit.component';
+import { CheckRowComponent } from './components/check-row/check-row.component';
+import { ChangeStatusComponent } from './components/change-status/change-status.component';
+import { ActionDeleteComponent } from './components/action-delete/action-delete.component';
+ import { ActionEditComponent } from './components/action-edit/action-edit.component';
 
 const routes: Routes = [
   { path: '', component: ListComponent },
   { path: 'update', component: UpdateComponent }
 ];
 @NgModule({
-  declarations: [ListComponent, UpdateComponent,
-    // ActionEditComponent
+  declarations: [ListComponent, UpdateComponent, 
+    CheckRowComponent,
+    ActionEditComponent,
+    ChangeStatusComponent,
+    ActionDeleteComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +33,11 @@ const routes: Routes = [
     ReactiveFormsModule
   ],
   // exports: [ActionEditComponent],
-  // entryComponents: [ActionEditComponent]
+   entryComponents: [
+    CheckRowComponent,
+    ActionEditComponent,
+    ChangeStatusComponent,
+    ActionDeleteComponent
+   ]
 })
 export class UsersModule { }
