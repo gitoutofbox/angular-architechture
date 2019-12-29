@@ -10,7 +10,7 @@
         </colgroup>
         <thead stickyHead>
             <tr>
-                <th *ngFor="let header of tableHeaders;" resizeCol>
+                <th *ngFor="let header of tableHeaders;" [ngClass]="header.class" resizeCol>
                     <div [style.width]="(header.width ? header.width: 200) - 1 + 'px'">
                         {{header.displayText}}
                     </div>
@@ -20,7 +20,7 @@
         <tbody>
             <tr *ngFor="let row of tableData">
                 <ng-container *ngFor=" let header of tableHeaders;">
-                    <td>
+                    <td [ngClass]="header.class">
                         <div *ngIf="(header.mapWith == '' && header.component != ''); else elseBlock">
                             <app-component-loader [component]="components[comp]" [data]="row" *ngFor="let comp of header.components"></app-component-loader>
                         </div>

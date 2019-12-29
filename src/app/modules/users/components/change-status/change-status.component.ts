@@ -9,6 +9,7 @@ import { ApiService } from '@core/services/api.service';
 })
 export class ChangeStatusComponent implements OnInit, AfterViewInit  {
   @Input() data: any;
+  inProgress: boolean = false;
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -23,10 +24,12 @@ export class ChangeStatusComponent implements OnInit, AfterViewInit  {
     const payload = {
       "is_active"   : !this.data.is_active
     };
+    this.inProgress = true;
     this.apiService.put(`http://localhost:8081/user/${this.data.user_id}`,payload).subscribe(resp => {
       //this.tableData = resp['data'];
       console.log(resp)
       this.data.is_active = !this.data.is_active;
+      this.inProgress = false;
     })
   }
 }

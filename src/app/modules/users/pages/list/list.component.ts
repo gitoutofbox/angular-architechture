@@ -14,8 +14,8 @@ export class ListComponent implements OnInit {
     {displayText:'First Name', mapWith: 'user_first_name', width: '200'}, 
     {displayText: 'Last Name', mapWith: 'user_last_name', width: '200'},
     {displayText: 'Email', mapWith: 'user_email', width: '400'},
-    {displayText: 'Status', mapWith: '', width: '70', components:['ChangeStatusComponent']},
-    {displayText: 'Action', mapWith: '', width: '150', components: ['ActionEditComponent', 'ActionDeleteComponent']}
+    {displayText: 'Status', mapWith: '', width: '70', class: "text-center", components:['ChangeStatusComponent']},
+    {displayText: 'Action', mapWith: '', width: '150', class: "text-center action-column", components: ['ActionEditComponent', 'ActionDeleteComponent']}
   ];
   public tableData ;
   constructor(private apiService: ApiService) { }
